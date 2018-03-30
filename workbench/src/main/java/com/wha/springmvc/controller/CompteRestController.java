@@ -41,7 +41,7 @@ public class CompteRestController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
     
-//------------------Associate an account to a client------------------------------------------------    
+  //------------------Associate an account to a client------------------------------------------------    
 
     @RequestMapping(value = "/compte/{numeroCompte}/client/{idClient}/", method = RequestMethod.PUT)
     public ResponseEntity<Compte> updateCompte(@PathVariable("numeroCompte") int numeroCompte, @RequestBody Compte compte, @PathVariable("idClient") int idClient, @RequestBody Client client) {
