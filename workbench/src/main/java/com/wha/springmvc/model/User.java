@@ -2,6 +2,8 @@ package com.wha.springmvc.model;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 @Table(name="user")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 
-public class User {
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
