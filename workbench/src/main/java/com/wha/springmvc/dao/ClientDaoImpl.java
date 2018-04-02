@@ -73,5 +73,14 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 			List<Compte> listCompte=client.getComptes();
 			return listCompte;
 		}
+		
+		
+		// liste de tous les clients qu'un conseiller peut avoir
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<Client> findAllClientsConseiller(int idConseiller) {
+			List<Client> cliList = getEntityManager().createQuery("SELECT c FROM Client c WHERE c.CONSEILLER_ID LIKE :idConseiller").getResultList();
+			return cliList;
+		}
 
 }

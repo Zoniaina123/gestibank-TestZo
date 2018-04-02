@@ -6,6 +6,7 @@ import javax.persistence.NoResultException;
 
 import org.springframework.stereotype.Repository;
 
+import com.wha.springmvc.model.Client;
 import com.wha.springmvc.model.Compte;
 import com.wha.springmvc.model.Conseiller;
 @Repository("conseillerDao")
@@ -13,8 +14,6 @@ public class ConseillerDaoImpl extends AbstractDao<Integer, Conseiller> implemen
 
 
 
-	
-	
 	
 	
 	
@@ -67,6 +66,8 @@ public class ConseillerDaoImpl extends AbstractDao<Integer, Conseiller> implemen
 		// TODO Auto-generated method stub
 
 	}
+
+	
 
 	
 }

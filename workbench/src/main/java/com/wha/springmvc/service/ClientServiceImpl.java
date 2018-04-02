@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wha.springmvc.dao.ClientDao;
+import com.wha.springmvc.dao.ConseillerDao;
 import com.wha.springmvc.model.Client;
 import com.wha.springmvc.model.Compte;
+import com.wha.springmvc.model.Conseiller;
 
 
 
@@ -21,6 +23,10 @@ public class ClientServiceImpl implements ClientService {
 	
 	@Autowired
 	private ClientDao dao;
+	
+	@Autowired 
+	private ConseillerDao daoCons;
+	
 	@Override
 	public Client findById(long id) {
 		return dao.findById((int)id);
@@ -48,6 +54,23 @@ Client entity = dao.findById((int)client.getId());
 		}
 		dao.save(entity);
 	}
+	
+	//associer un client à un conseiller
+		@Override
+		public void updateConseillerClient(Client client,int idConseiller) {
+			Client cli = dao.findByName((String)client.getUsername());
+
+			Conseiller entity = daoCons.findById(idConseiller);
+		
+			
+			if(cli!=null){
+				if(entity!=null) {
+					cli.setConseiller(entity);
+				}	
+			}
+			daoCons.save(entity);
+			
+		}
 
 	@Override
 	public void deleteClientById(long id) {

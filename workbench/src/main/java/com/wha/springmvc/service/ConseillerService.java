@@ -2,6 +2,7 @@ package com.wha.springmvc.service;
 
 import java.util.List;
 
+import com.wha.springmvc.model.Client;
 import com.wha.springmvc.model.Conseiller;
 
 public interface ConseillerService {
@@ -15,6 +16,8 @@ public interface ConseillerService {
 	void saveConseiller(Conseiller conseiller);
 	
 	void updateConseiller(Conseiller conseiller);
+	
+	
 	
 	void deleteConseillerById(long id);
 

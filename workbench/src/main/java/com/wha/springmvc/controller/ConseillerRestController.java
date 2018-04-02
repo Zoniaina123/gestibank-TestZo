@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.wha.springmvc.model.Client;
+import com.wha.springmvc.model.Compte;
 import com.wha.springmvc.model.Conseiller;
+import com.wha.springmvc.service.ClientService;
 import com.wha.springmvc.service.ConseillerService;
 
 @RestController
@@ -25,6 +28,9 @@ public class ConseillerRestController {
 	
 	 @Autowired
 	 ConseillerService conseillerService;  //Service which will do all data retrieval/manipulation work
+	 
+	 @Autowired
+	 ClientService clientService;
 	 
 	 //-------------------Retrieve All Conseillers--------------------------------------------------------
      
@@ -95,6 +101,28 @@ public class ConseillerRestController {
 	        return new ResponseEntity<Conseiller>(currentuser, HttpStatus.OK);
 	    }
 	 
+	  //------------------Associate a client to conseiller------------------------------------------------    
+
+	    @RequestMapping(value = "/administrator/client/{name}/conseiller/{idConseiller}", method = RequestMethod.PUT)
+	    public ResponseEntity<Client> updateConseillerClient(@PathVariable("name") String name, @PathVariable("idConseiller") int idConseiller) {
+	        System.out.println("Updating client " + name + "associate to conseiller " + idConseiller );
+	    
+			Client currentCli = clientService.findByName(name);
+			
+	         
+	        if (currentCli==null) {
+	        	System.out.println("Client with name " + name + " not found");
+	            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+	        }
+	 
+	        Conseiller cons = conseillerService.findById(idConseiller);
+	        
+	        currentCli.setConseiller(cons);
+	     
+	         
+	        clientService.updateConseillerClient(currentCli,idConseiller);
+	        return new ResponseEntity<Client>(currentCli, HttpStatus.OK);
+	    }
 	    
 	    
 	    //------------------- Delete a Conseiller --------------------------------------------------------

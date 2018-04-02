@@ -18,6 +18,10 @@ public interface ClientDao {
 	
 	List<Client> findAllClients();
 	
+	// liste de tous les clients qu'un conseiller peut avoir
+	List<Client> findAllClientsConseiller(int idConseiller);
+	
+	
 	void deleteAllClients();
 	//afficher les comptes d'un client
 	

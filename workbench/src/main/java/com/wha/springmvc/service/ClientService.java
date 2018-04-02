@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wha.springmvc.model.Client;
 import com.wha.springmvc.model.Compte;
+import com.wha.springmvc.model.Conseiller;
 
 public interface ClientService {
 	
@@ -15,6 +16,9 @@ Client findByName(String name);
 	void saveClient(Client client);
 	
 	void updateClient(Client client);
+	
+	//associer un client à un conseiller
+	void updateConseillerClient(Client client,int idConseiller);
 	
 	void deleteClientById(long id);
 

@@ -1,5 +1,6 @@
 package com.wha.springmvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,7 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wha.springmvc.dao.ClientDao;
 import com.wha.springmvc.dao.ConseillerDao;
+import com.wha.springmvc.model.Client;
 import com.wha.springmvc.model.Conseiller;
 @Service("conseillerService")
 @Transactional
@@ -17,6 +20,9 @@ public class ConseillerServiceImpl implements ConseillerService {
 	@Autowired
 	private ConseillerDao dao;
 
+	@Autowired 
+	private ClientDao daoCli;
+	
 	@Override
 	public Conseiller findById(long id) {
 		return dao.findById((int)id);
@@ -44,6 +50,7 @@ public class ConseillerServiceImpl implements ConseillerService {
 		dao.save(entity);
 
 	}
+	
 
 	@Override
 	public void deleteConseillerById(long id) {
@@ -67,5 +74,7 @@ public class ConseillerServiceImpl implements ConseillerService {
 	public boolean isConseillerExist(Conseiller conseiller) {
 		return dao.findByName((String) conseiller.getUsername())!=null;
 	}
+
+	
 
 }
