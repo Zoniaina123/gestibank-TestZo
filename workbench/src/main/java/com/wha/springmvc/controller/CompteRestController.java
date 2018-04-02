@@ -26,7 +26,7 @@ public class CompteRestController {
 //-------------------Create an account--------------------------------------------------------
     
     @RequestMapping(value = "/compte/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createClient(@RequestBody Compte compte,    UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createCompte(@RequestBody Compte compte,    UriComponentsBuilder ucBuilder) {
         System.out.println("Compte " + compte.getNumeroCompte() + "a été créé");
  
         if (compteService.isAccountExist(compte)) {
@@ -37,7 +37,7 @@ public class CompteRestController {
         compteService.save(compte);
  
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/compte/{numeroCompte}").buildAndExpand(compte.getNumeroCompte()).toUri());
+        headers.setLocation(ucBuilder.path("/conseiller/{id}").buildAndExpand(compte.getNumeroCompte()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
     
