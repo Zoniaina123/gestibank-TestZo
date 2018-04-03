@@ -18,7 +18,7 @@ Client findByName(String name);
 	void updateClient(Client client);
 	
 	//associer un client à un conseiller
-	void updateConseillerClient(Client client,int idConseiller);
+	void updateConseillerClient(String userNameClient,int idConseiller);
 	
 	void deleteClientById(long id);
 

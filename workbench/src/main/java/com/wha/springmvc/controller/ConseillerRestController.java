@@ -103,25 +103,25 @@ public class ConseillerRestController {
 	 
 	  //------------------Associate a client to conseiller------------------------------------------------    
 
-	    @RequestMapping(value = "/administrator/client/{name}/conseiller/{idConseiller}", method = RequestMethod.PUT)
-	    public ResponseEntity<Client> updateConseillerClient(@PathVariable("name") String name, @PathVariable("idConseiller") int idConseiller) {
-	        System.out.println("Updating client " + name + "associate to conseiller " + idConseiller );
+	    @RequestMapping(value = "/administrator/client/conseiller/{id}/", method = RequestMethod.POST)
+	    public ResponseEntity<Void> createClient(@PathVariable("id") int id, @RequestBody Client client, UriComponentsBuilder ucBuilder) {
+	        System.out.println("Updating client " + client + "associate to conseiller " + id);
 	    
-			Client currentCli = clientService.findByName(name);
-			
+	        Conseiller currentCons = conseillerService.findById(id);
 	         
-	        if (currentCli==null) {
-	        	System.out.println("Client with name " + name + " not found");
+	        if (currentCons==null) {
+	        	System.out.println("Conseiller with id " + id + " not found");
 	            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
 	        }
 	 
-	        Conseiller cons = conseillerService.findById(idConseiller);
 	        
-	        currentCli.setConseiller(cons);
+	        client.setConseiller(currentCons);
 	     
 	         
-	        clientService.updateConseillerClient(currentCli,idConseiller);
-	        return new ResponseEntity<Client>(currentCli, HttpStatus.OK);
+	        clientService.createClient(client);
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setLocation(ucBuilder.path("/administrator/{id}").buildAndExpand(client.getId()).toUri());
+	        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	    }
 	    
 	    

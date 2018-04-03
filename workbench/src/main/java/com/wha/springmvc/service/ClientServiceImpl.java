@@ -57,8 +57,8 @@ Client entity = dao.findById((int)client.getId());
 	
 	//associer un client à un conseiller
 		@Override
-		public void updateConseillerClient(Client client,int idConseiller) {
-			Client cli = dao.findByName((String)client.getUsername());
+		public void updateConseillerClient(String userNameClient,int idConseiller) {
+			Client cli = dao.findByName(userNameClient);
 
 			Conseiller entity = daoCons.findById(idConseiller);
 		
