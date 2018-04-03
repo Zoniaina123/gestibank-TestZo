@@ -104,24 +104,47 @@ public class ConseillerRestController {
 	  //------------------Associate a client to conseiller------------------------------------------------    
 
 	    @RequestMapping(value = "/administrator/client/conseiller/{id}/", method = RequestMethod.POST)
-	    public ResponseEntity<Void> createClient(@PathVariable("id") int id, @RequestBody Client client, UriComponentsBuilder ucBuilder) {
-	        System.out.println("Updating client " + client + "associate to conseiller " + id);
+	    public ResponseEntity<Void> updateClient(@PathVariable("id") int id, @RequestBody Client client, UriComponentsBuilder ucBuilder) {
+	        System.out.println("Create client " + client + "associate to conseiller " + id);
 	    
 	        Conseiller currentCons = conseillerService.findById(id);
 	         
-	        if (currentCons==null) {
-	        	System.out.println("Conseiller with id " + id + " not found");
-	            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+	        if (clientService.isUserExist(client)) {
+	            System.out.println("A Client with name " + client.getUsername() + " already exist");
+	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 	        }
-	 
 	        
 	        client.setConseiller(currentCons);
 	     
 	         
-	        clientService.createClient(client);
+	        clientService.saveClient(client);
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.setLocation(ucBuilder.path("/administrator/{id}").buildAndExpand(client.getId()).toUri());
 	        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+	    }
+	    
+	  //------------------Associate a client to conseiller------------------------------------------------    
+
+	    @RequestMapping(value = "/administrator/client/{idClient}/conseiller/", method = RequestMethod.PUT)
+	    public ResponseEntity<Client> updateClient(@PathVariable("idClient") int idClient, @RequestBody Client client) {
+	        System.out.println("Updating client " + client );
+	    
+	         
+	        Client currentUser = clientService.findById(idClient);
+	         
+	        if (currentUser==null) {
+	            System.out.println("Client with id " + idClient + " not found");
+	            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+	        }
+	        
+	        currentUser.setConseiller(client.getConseiller());
+	     
+	        
+	         
+	        clientService.updateClient(client);
+	        
+	        
+	        return new ResponseEntity<Client>(client, HttpStatus.OK);
 	    }
 	    
 	    
