@@ -77,15 +77,7 @@ public class Conseiller extends User {
 	}
 
 	
-/*public List<Client> getClients() {
-		return (List<Client>) clients;
-	}
 
-	public void setClients(Client clients) {
-		this.clients = clients;
-	}*/
-
-	
 	
 	
 

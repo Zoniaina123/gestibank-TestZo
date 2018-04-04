@@ -109,6 +109,8 @@ public class ConseillerRestController {
 	    
 	        Conseiller currentCons = conseillerService.findById(id);
 	         
+	        
+	        
 	        if (clientService.isUserExist(client)) {
 	            System.out.println("A Client with name " + client.getUsername() + " already exist");
 	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -119,33 +121,11 @@ public class ConseillerRestController {
 	         
 	        clientService.saveClient(client);
 	        HttpHeaders headers = new HttpHeaders();
-	        headers.setLocation(ucBuilder.path("/administrator/{id}").buildAndExpand(client.getId()).toUri());
+	        headers.setLocation(ucBuilder.path("/conseiller/{id}").buildAndExpand(client.getId()).toUri());
 	        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	    }
 	    
-	  //------------------Associate a client to conseiller------------------------------------------------    
-
-	    @RequestMapping(value = "/administrator/client/{idClient}/conseiller/", method = RequestMethod.PUT)
-	    public ResponseEntity<Client> updateClient(@PathVariable("idClient") int idClient, @RequestBody Client client) {
-	        System.out.println("Updating client " + client );
-	    
-	         
-	        Client currentUser = clientService.findById(idClient);
-	         
-	        if (currentUser==null) {
-	            System.out.println("Client with id " + idClient + " not found");
-	            return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
-	        }
-	        
-	        currentUser.setConseiller(client.getConseiller());
-	     
-	        
-	         
-	        clientService.updateClient(client);
-	        
-	        
-	        return new ResponseEntity<Client>(client, HttpStatus.OK);
-	    }
+	
 	    
 	    
 	    //------------------- Delete a Conseiller --------------------------------------------------------

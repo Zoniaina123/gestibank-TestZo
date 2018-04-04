@@ -40,6 +40,8 @@ public class ConseillerDaoImpl extends AbstractDao<Integer, Conseiller> implemen
 		}
 	
 	}
+	
+	
 
 	@Override
 	public void save(Conseiller conseiller) {

@@ -1,5 +1,6 @@
 package com.wha.springmvc.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,6 +35,20 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 		try {
 			Client client = (Client) getEntityManager().createQuery("SELECT c FROM Client c WHERE c.username LIKE :name").setParameter("name", name).getSingleResult();
 			return client;
+			
+		} catch (NoResultException ex) {
+			return null;
+		}
+	}
+	
+	@Override
+	public List<Client> findByConseillerId(int id) {
+		
+		try {
+			List<Client> clients = new ArrayList<Client>();
+			Client client = (Client) getEntityManager().createQuery("SELECT c FROM Client c WHERE c.CONSEILLER_ID LIKE :id").setParameter("id", id).getSingleResult();
+			clients.add(client);
+			return clients;
 			
 		} catch (NoResultException ex) {
 			return null;

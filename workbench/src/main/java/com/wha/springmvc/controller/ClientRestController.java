@@ -40,6 +40,18 @@ public class ClientRestController {
     }
     
     
+
+	 //-------------------Retrieve All Clients --------------------------------------------------------
+   
+   @RequestMapping(value = "/conseiller/{id}/clients/", method = RequestMethod.GET)
+   public ResponseEntity<List<Client>> listAllClientsConseiller(@PathVariable("id") int id) {
+       List<Client> clients = clientService.findByConseillerId(id);
+       if(clients.isEmpty()){
+           return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+       }
+       return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
+   }
+    
     
 //-------------------Retrieve All Comptes--------------------------------------------------------
     

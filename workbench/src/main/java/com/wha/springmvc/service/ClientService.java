@@ -30,5 +30,8 @@ Client findByName(String name);
 	
 	//liste des comptes d'un client
 	List<Compte> findbyIdClient(int idClient);
+	
+	//
+	List<Client> findByConseillerId(int id);
 
 }

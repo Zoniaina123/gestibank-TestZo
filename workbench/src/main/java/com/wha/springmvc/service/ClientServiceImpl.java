@@ -100,5 +100,11 @@ Client entity = dao.findById((int)client.getId());
 	public List<Compte> findbyIdClient(int idClient) {
 		return dao.findbyIdClient(idClient);
 	}
+
+	@Override
+	public List<Client> findByConseillerId(int id) {
+		
+		return dao.findByConseillerId(id);
+	}
 	
 }
