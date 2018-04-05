@@ -34,20 +34,20 @@ public class ClientRestController {
     public ResponseEntity<List<Client>> listAllClients() {
         List<Client> clients = clientService.findAllClients();
         if(clients.isEmpty()){
-            return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+            return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
     }
     
     
 
-	 //-------------------Retrieve All Clients --------------------------------------------------------
+	 //-------------------Retrieve All Clients from conseillerID --------------------------------------------------------
    
-   @RequestMapping(value = "/conseiller/{id}/clients/", method = RequestMethod.GET)
+   @RequestMapping(value = "/conseiller/{id}/clients/", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<List<Client>> listAllClientsConseiller(@PathVariable("id") int id) {
-       List<Client> clients = clientService.findByConseillerId(id);
+       List<Client> clients = clientService.findAllClientsConseiller(id);
        if(clients.isEmpty()){
-           return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+           return new ResponseEntity<List<Client>>(HttpStatus.NO_CONTENT);
        }
        return new ResponseEntity<List<Client>>(clients, HttpStatus.OK);
    }
@@ -59,7 +59,7 @@ public class ClientRestController {
     public ResponseEntity<List<Compte>> listAllConseillers(@PathVariable("id") int idClient) {
         List<Compte> comptes = clientService.findbyIdClient(idClient);
         if(comptes.isEmpty()){
-            return new ResponseEntity<List<Compte>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+            return new ResponseEntity<List<Compte>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Compte>>(comptes, HttpStatus.OK);
     }

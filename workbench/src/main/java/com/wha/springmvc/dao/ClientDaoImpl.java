@@ -41,19 +41,6 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 		}
 	}
 	
-	@Override
-	public List<Client> findByConseillerId(int id) {
-		
-		try {
-			List<Client> clients = new ArrayList<Client>();
-			Client client = (Client) getEntityManager().createQuery("SELECT c FROM Client c WHERE c.CONSEILLER_ID LIKE :id").setParameter("id", id).getSingleResult();
-			clients.add(client);
-			return clients;
-			
-		} catch (NoResultException ex) {
-			return null;
-		}
-	}
 
 	@Override
 	public void save(Client client) {

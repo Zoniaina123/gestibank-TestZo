@@ -28,5 +28,5 @@ public interface ClientDao {
 		List<Compte> findbyIdClient(int idClient);
 
 		
-		List<Client> findByConseillerId(int id);
+		
 }

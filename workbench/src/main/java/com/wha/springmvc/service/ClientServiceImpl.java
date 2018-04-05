@@ -101,10 +101,12 @@ Client entity = dao.findById((int)client.getId());
 		return dao.findbyIdClient(idClient);
 	}
 
+
+	// liste de tous les clients qu'un conseiller peut avoir
 	@Override
-	public List<Client> findByConseillerId(int id) {
+	public List<Client> findAllClientsConseiller(int idConseiller) {
 		
-		return dao.findByConseillerId(id);
+		return dao.findAllClientsConseiller(idConseiller);
 	}
 	
 }
