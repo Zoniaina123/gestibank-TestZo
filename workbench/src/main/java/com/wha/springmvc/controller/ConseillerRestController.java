@@ -134,14 +134,17 @@ public class ConseillerRestController {
 	    public ResponseEntity<Conseiller> deleteConseiller(@PathVariable("id") int id) {
 	        System.out.println("Fetching & Deleting Conseiller with id " + id);
 	 
-	        Conseiller Conseiller = conseillerService.findById(id);
-	        if (Conseiller == null) {
-	            System.out.println("Unable to delete. Conseiller with id " + id + " not found");
-	            return new ResponseEntity<Conseiller>(HttpStatus.NOT_FOUND);
+	        Conseiller conseiller = conseillerService.findById(id);
+	        List<Client> listClient = conseiller.getClients();
+	        
+	        
+	        if (listClient != null) {
+	        	 System.out.println("Unable to delete. Conseiller with id " + id + " has clients");
+		         return new ResponseEntity<Conseiller>(HttpStatus.METHOD_NOT_ALLOWED);
 	        }
-	 
 	        conseillerService.deleteConseillerById(id);
 	        return new ResponseEntity<Conseiller>(HttpStatus.NO_CONTENT);
+	        
 	    }
 	 
 	     

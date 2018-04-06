@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -24,11 +27,11 @@ public class Conseiller extends User {
 	private Date dateDebut;
 	
 	
-	
-	@OneToMany(mappedBy="conseiller")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="conseiller")
     private List<Client> clients;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	 @JoinColumn(name="ADMIN_ID")
 	private Administrator administrator;
 	

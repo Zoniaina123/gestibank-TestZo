@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,11 +23,11 @@ public class Client extends User {
 	private String situation;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="CONSEILLER_ID")
 	private Conseiller conseiller;
 	
-	@OneToMany(mappedBy="client")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="client")
     private List<Compte> comptes;
 
 	public Client() {

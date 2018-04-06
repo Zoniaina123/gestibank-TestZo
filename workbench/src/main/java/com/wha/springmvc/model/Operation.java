@@ -4,6 +4,7 @@ package com.wha.springmvc.model;
 import java.util.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Operation {
 	private String libelle;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPTE_ID")
 	private Compte compte;
 	
